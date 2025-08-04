@@ -1,2 +1,2 @@
-# wgt-tracker
-weight tracker full stack app.
+weight tracking app 
+with login and personalize dashboard
