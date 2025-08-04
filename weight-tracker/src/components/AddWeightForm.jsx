@@ -40,22 +40,22 @@ const AddWeightForm = ({ fetchWeights, date, setDate, wgt, setWgt, editingId, se
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-md w-full max-w-sm">
-      <h3 className="text-lg font-semibold mb-4 text-gray-700">
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-md shadow-md w-full max-w-sm">
+      <h3 className="text-lg font-semibold mb-4 text-gray-700 dark:text-white">
         {editingId ? 'Edit Weight' : 'Add Weight'}
       </h3>
       <input
         type="date"
         value={date}
         onChange={(e) => setDate(e.target.value)}
-        className="border w-full p-2 mb-3 rounded"
+        className="border w-full p-2 mb-3 rounded border-gray-400 dark:bg-gray-700 dark:text-gray-200"
       />
       <input
         type="number"
         placeholder="Weight in kg"
         value={wgt}
         onChange={(e) => setWgt(e.target.value)}
-        className="border w-full p-2 mb-3 rounded"
+        className="border w-full p-2 mb-3 rounded border-gray-400 dark:bg-gray-700 dark:text-gray-200"
       />
       <button
         type="submit"
