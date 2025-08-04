@@ -12,9 +12,8 @@ A full-stack weight tracking application with **JWT authentication**, **responsi
 ### 🌚 Dark Mode
 ![Dark Mode Screenshot](../wgt-tracker/weight-tracker/src/assets/image1.png)
 
-> 📁 Place your screenshots in a folder named `screenshots` in the root of your project.
 
----
+
 
 ## 🚀 Features
 
@@ -25,7 +24,7 @@ A full-stack weight tracking application with **JWT authentication**, **responsi
 - 📅 Filter graph by current month, 6 months, yearly
 - 📱 Responsive UI using Tailwind CSS
 
----
+
 
 ## ⚙️ Tech Stack
 
@@ -42,7 +41,7 @@ A full-stack weight tracking application with **JWT authentication**, **responsi
 - MongoDB (Mongoose)
 - JWT Authentication
 
----
+
 
 ## 🔧 Installation
 
