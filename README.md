@@ -7,10 +7,10 @@ A full-stack weight tracking application with **JWT authentication**, **responsi
 ## 📸 Screenshots
 
 ### 🌞 Light Mode
-![Light Mode Screenshot](../wgt-tracker/weight-tracker/src/assets/image2.png)
+![Light Mode Screenshot](/image1.png)
 
 ### 🌚 Dark Mode
-![Dark Mode Screenshot](../wgt-tracker/weight-tracker/src/assets/image1.png)
+![Dark Mode Screenshot](/image2.png)
 
 
 
