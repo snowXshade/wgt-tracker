@@ -5,42 +5,50 @@ import { getMonthName } from '../components/month.js';
 import '../utils/chartjs.js'
 
 const GraphViewer = ({ weights }) => {
+
   const [graphType, setGraphType] = useState('line');
   const [timeRange, setTimeRange] = useState('all'); // all, month, 6-month, year
-  var average = 0;
+
+
+  const now = new Date(); 
+  var month = weights.filter(w => new Date(w.date).getMonth() === now.getMonth());
+  var sixMonthsAgo = new Date(now.setMonth(now.getMonth() - 5));
+  var sixMonths = weights.filter(w => new Date(w.date) >= sixMonthsAgo);
+  var year = weights.filter(w => new Date(w.date).getFullYear() === new Date().getFullYear());
 
   const getFilteredWeights = () => {
-    const now = new Date();
+    
     if (timeRange === 'month') {
-      return weights.filter(w => new Date(w.date).getMonth() === now.getMonth());
+      return month
     } else if (timeRange === '6-month') {
-      const sixMonthsAgo = new Date(now.setMonth(now.getMonth() - 5));
-      return weights.filter(w => new Date(w.date) >= sixMonthsAgo);
+      return sixMonths
     } else if (timeRange === 'year') {
-      return weights.filter(w => new Date(w.date).getFullYear() === new Date().getFullYear());
+      return year
     }
     return weights;
   };
 
   const filteredWeights = getFilteredWeights();
+  var average = weights.reduce((a, b) => a + b.wgt, 0) / weights.length
 
   const chartData = {
     labels: filteredWeights.map(w => new Date(w.date).toLocaleDateString()),
     datasets: [{
-      label: 'Weight (kg)',
+      label: [`average ${average} kg`],
       data: filteredWeights.map(w => w.wgt),
       backgroundColor: filteredWeights.map(w => {
         average = weights.reduce((a, b) => a + b.wgt, 0) / weights.length;
-        return w.wgt > average ? 'rgba(255,99,132,0.6)' : 'rgba(75,192,192,0.6)';
+        return w.wgt > average+2 ? '#0d4374' : w.wgt < average-2 ? '#3ad0c5' : '#36979f';
       }),
-      borderColor: '#3b82f6',
-      borderWidth: 2,
+      borderColor: '#dadada',
+      borderWidth: 1,
     }]
   };
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-xl bg-white dark:bg-gray-800 p-6 rounded-md shadow-md">
       {/* Graph Type and Time Filter */}
+      
       <div className="flex flex-wrap justify-end gap-2 mb-2">
         <button onClick={() => setGraphType('line')} className="px-2 py-1 border rounded dark:border-gray-500 dark:text-gray-400">Line</button>
         <button onClick={() => setGraphType('bar')} className="px-2 py-1 border rounded dark:border-gray-500 dark:text-gray-400">Bar</button>
@@ -52,7 +60,7 @@ const GraphViewer = ({ weights }) => {
       </div>
 
       {/* Graph Display */}
-      <div className="w-full">
+      <div className="w-full h-[350px] overflow-x-scroll">
         {filteredWeights.length === 0 ? (
           <p className="text-gray-500">No data available for selected range.</p>
         ) : graphType === 'line' ? (

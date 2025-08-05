@@ -46,6 +46,42 @@ A full-stack weight tracking application with **JWT authentication**, **responsi
 ## 🔧 Installation
 
 ### 1. Clone the repo
-```bash
-git clone [url]
-cd weight-tracker
+
+> bash
+
+    git clone https://github.com/snowXshade/wgt-tracker.git
+
+    cd wgt-tracker
+
+
+### 2. Create .env file in ```backend-wgt```
+
+> .env
+
+    PORT= [your_port]
+
+    MONGO_URL= mongodb://127.0.0.1:27017/weight-traker "or" [your_mongo_db_atlas_url]
+
+    JWT_SECRET= [your_jwt_secret_key]
+
+
+### 3. Termeinal 
+
+> To start server
+
+    cd backend-wgt
+
+    npm init -y
+    
+    npm run dev "or" npm run start
+
+
+### 4. Nwe Terminal 
+
+> To start frontent web app
+
+    cd weight-tracker
+
+    npm install
+    
+    npm run dev 

@@ -7,8 +7,13 @@ import Navbar from '../components/Navbar';
 import AddWeightForm from '../components/AddWeightForm';
 import GraphViewer from '../components/GraphViewer';
 import DataTable from '../components/DataTable';
+import Suggestions from '../components/Suggestions.jsx';
 
 const WeightDashboard = () => {
+
+  const back_url = import.meta.env.VITE_BACKEND_URL;
+  // const [add, setAdd] = useState(false);
+  // const [edit,setEdit] = useState(false);
   const [weights, setWeights] = useState([]);
   const [graphType, setGraphType] = useState('line');
 
@@ -19,7 +24,7 @@ const WeightDashboard = () => {
 
   const fetchWeights = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/wgt', {
+      const res = await axios.get(back_url + '/api/wgt', {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setWeights(res.data);
@@ -31,7 +36,7 @@ const WeightDashboard = () => {
 
   const handleDeleteFunction = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/wgt/${id}`, {
+      await axios.delete(back_url + `/api/wgt/${id}`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       fetchWeights();
@@ -53,38 +58,59 @@ const WeightDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 relative">
+      {/* Navbar */}
       <Navbar userEmail={getUserEmailFromToken()} onLogout={() => {
         clearToken();
-        window.location.href = '/';
+        navigator('/');
       }} />
 
-      <div className="p-6 flex flex-col lg:flex-row justify-center items-start gap-10">
-        <AddWeightForm
-          fetchWeights={fetchWeights}
-          date={date}
-          setDate={setDate}
-          wgt={wgt}
-          setWgt={setWgt}
-          editingId={editingId}
-          setEditingId={setEditingId}
-        />
+      {/* main body */}
+      <div className='flex flex-wrap flex-col lg:flex-row gap-10 items-start py-8 px-3 justify-around'>
 
-        <GraphViewer
+        {/* add data or edit data box */}
+        <div>
+          <AddWeightForm
+            fetchWeights={fetchWeights}
+            date={date}
+            setDate={setDate}
+            wgt={wgt}
+            setWgt={setWgt}
+            editingId={editingId}
+            setEditingId={setEditingId}
+          />
+          
+        </div>
+
+        {/* summary/suggestions */}
+        <div>
+          <Suggestions />
+        </div>
+
+
+        {/* graph */}
+        <div>
+          <GraphViewer
           weights={weights}
           graphType={graphType}
           setGraphType={setGraphType}
         />
+        </div>
+
+        {/* data history table */}
+        <div>
+          <DataTable
+          weights={weights}
+          onEdit={handleEditFunction}
+          onDelete={handleDeleteFunction}
+        />
+        </div>
+
+
       </div>
 
-      <div className='flex justify-center py-10'>
-        <DataTable
-        weights={weights}
-        onEdit={handleEditFunction}
-        onDelete={handleDeleteFunction}
-      />
-      </div>
     </div>
+
   );
 };
 

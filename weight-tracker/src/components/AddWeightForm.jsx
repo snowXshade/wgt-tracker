@@ -40,15 +40,18 @@ const AddWeightForm = ({ fetchWeights, date, setDate, wgt, setWgt, editingId, se
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-md shadow-md w-full max-w-sm">
+    <div className='text-gray-500'>
+
+<form onSubmit={handleSubmit} className=" bg-white dark:bg-gray-800 p-6 rounded-md shadow-md w-full max-w-sm z-50">
       <h3 className="text-lg font-semibold mb-4 text-gray-700 dark:text-white">
         {editingId ? 'Edit Weight' : 'Add Weight'}
       </h3>
       <input
         type="date"
         value={date}
+        max="2025-08-05"
         onChange={(e) => setDate(e.target.value)}
-        className="border w-full p-2 mb-3 rounded border-gray-400 dark:bg-gray-700 dark:text-gray-200"
+        className="border w-full p-2 mb-3 rounded border-gray-400 dark:bg-gray-700 dark:text-gray-200 web"
       />
       <input
         type="number"
@@ -59,11 +62,13 @@ const AddWeightForm = ({ fetchWeights, date, setDate, wgt, setWgt, editingId, se
       />
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600  dark:bg-blue-900 dark:text-blue-100"
       >
         {editingId ? 'Update Entry' : 'Add Entry'}
       </button>
     </form>
+
+    </div>
   );
 };
 

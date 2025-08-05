@@ -5,3 +5,7 @@
 html {
   transition: all 0.3s ease;
 }
+
+::-webkit-scrollbar{
+  @apply hidden
+}

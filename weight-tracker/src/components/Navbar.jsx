@@ -33,7 +33,7 @@ const Navbar = ({ userEmail }) => {
         {/* Theme Toggle */}
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="text-sm border px-3 py-1 rounded dark:text-white dark:border-white"
+          className="text-sm border px-3 py-1 rounded dark:text-white dark:border-gray-500"
         >
           {darkMode ? '☀️ Light' : '🌙 Dark'}
         </button>
