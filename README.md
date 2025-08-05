@@ -76,7 +76,14 @@ A full-stack weight tracking application with **JWT authentication**, **responsi
     npm run dev "or" npm run start
 
 
-### 4. Nwe Terminal 
+### 4. Create .env file in ```weight-tracker```
+
+> .env
+
+    VITE_BACKEND_URL= [your_backend_server_url]
+
+
+### 4. New Terminal 
 
 > To start frontent web app
 
